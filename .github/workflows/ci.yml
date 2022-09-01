@@ -13,7 +13,7 @@ on:
 
 jobs:
    test:
-    name: Check the source code
+    name: Flutter Lint
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3

@@ -53,6 +53,16 @@ flutter:
   # the material Icons class.
   uses-material-design: true
 
+  fonts:
+    - family: Source Sans Pro
+      fonts:
+        - asset: lib/resources/fonts/SourceSansPro-Regular.otf
+          weight: 400
+        - asset: lib/resources/fonts/SourceSansPro-Semibold.otf
+          weight: 600
+        - asset: lib/resources/fonts/SourceSansPro-Bold.otf
+          weight: 700
+
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg
@@ -81,5 +91,6 @@ flutter:
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
   #
+
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:migoc2/pages/Base/bottom_navigation_bar/provider/bottom_navigation_bar_provider.dart';
+import 'package:migoc2/pages/base/navigation/provider/navigation_provider.dart';
 import 'package:migoc2/resources/dark_theme_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -37,14 +37,14 @@ class _BottomBarState extends State<_BottomBar> {
           ),
           child: BottomNavigationBar(
             type: BottomNavigationBarType.fixed,
-            items: const <BottomNavigationBarItem>[
+            items: <BottomNavigationBarItem>[
               BottomNavigationBarItem(
                   icon: Icon(
-                      CupertinoIcons.home,
+                    context.watch<NavigationProvider>().selectedIndex == 0 ? CupertinoIcons.house_fill :  CupertinoIcons.house,
                   ),
                   label: 'Início',
               ),
-              BottomNavigationBarItem(
+              const BottomNavigationBarItem(
                   icon: Icon(
                       CupertinoIcons.search,
                   ),
@@ -52,13 +52,13 @@ class _BottomBarState extends State<_BottomBar> {
               ),
               BottomNavigationBarItem(
                   icon: Icon(
-                      CupertinoIcons.book,
+                    context.watch<NavigationProvider>().selectedIndex == 2 ? CupertinoIcons.book_fill : CupertinoIcons.book,
                   ),
                 label: 'Assuntos',
               )
             ],
-            currentIndex: context.watch<BottomBarProvider>().selectedIndex,
-            onTap: context.watch<BottomBarProvider>().onItemTapped,
+            currentIndex: context.watch<NavigationProvider>().selectedIndex,
+            onTap: context.watch<NavigationProvider>().bottomTapped,
           ),
         ),
       ),

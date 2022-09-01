@@ -13,6 +13,7 @@ import 'package:migoc2/resources/colors_extensions.dart';
       backgroundColor: isDarkTheme ? UIColors.darkBackgroundColor : UIColors.lightBackgroundColor,
       appBarTheme: AppBarTheme(
         backgroundColor: UIColors.primaryColor,
+        centerTitle: true,
         titleTextStyle: const TextStyle(
           fontFamily: 'Source Sans Pro',
           fontWeight: FontWeight.w600,

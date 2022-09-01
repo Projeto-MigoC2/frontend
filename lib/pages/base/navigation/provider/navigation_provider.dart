@@ -12,8 +12,6 @@ class NavigationProvider extends ChangeNotifier {
   }
 
   void bottomTapped(int index) {
-    _selectedIndex = index;
-    pageController.animateToPage(index, duration: const Duration(milliseconds: 500), curve: Curves.ease);
-    notifyListeners();
+    pageController.animateToPage(index, duration: const Duration(milliseconds: 500), curve: Curves.easeInOut);
   }
 }

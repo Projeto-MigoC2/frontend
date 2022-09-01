@@ -1,12 +1,6 @@
-// To parse this JSON data, do
-//
-//     final assuntosModel = assuntosModelFromJson(jsonString);
-
 import 'dart:convert';
 
-List<AssuntosModel> assuntosModelFromJson(String str) => List<AssuntosModel>.from(json.decode(str).map((x) => AssuntosModel.fromJson(x)));
-
-String assuntosModelToJson(List<AssuntosModel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+List<AssuntosModel> assuntosModelFromJson(String str) => (json.decode(str) as List).map((x) => AssuntosModel.fromJson(x as Map<String, dynamic>)).toList();
 
 class AssuntosModel {
   AssuntosModel({
@@ -15,11 +9,8 @@ class AssuntosModel {
 
   String titulo;
 
-  factory AssuntosModel.fromJson(Map<String, dynamic> json) => AssuntosModel(
-    titulo: json["titulo"],
-  );
+  factory AssuntosModel.fromJson(Map<String, dynamic> json) => AssuntosModel (
+    titulo: json['titulo'] as String,
+    );
 
-  Map<String, dynamic> toJson() => {
-    "titulo": titulo,
-  };
 }

@@ -8,37 +8,19 @@ class SubjectScreen extends StatefulWidget {
 
 class _SubjectScreen extends State<SubjectScreen> {
   
-  Card assuntosDropdown(int ordem, List<String> listaAssunto){
-    List<DropdownMenuItem<String>> listaItens = [];
-    listaItens.add(
+  Card assuntosDropdown(List<String> listaAssunto){
+    
+    final List<DropdownMenuItem<String>> listaItens = listaAssunto.map((item) =>
         DropdownMenuItem(
-                value: assuntosList[ordem],
+                value: item,
                 child: Text(
-                  assuntosList[ordem],
-                  style: const TextStyle(
-                    fontFamily: 'Source Sans Pro', 
-                    fontWeight: FontWeight.w600,
-                    fontSize: 17,
+                  item,
+                  style: TextStyle(
+                    color: item == listaAssunto[0] ? const Color(0xFF000000) : const Color(0xff39EBB0),                    
                   ),
                 ),
         ),
-    );
-    for(int i = 0; i<listaAssunto.length; i++){
-      listaItens.add(
-        DropdownMenuItem(
-                value: listaAssunto[i],
-                child: Text(
-                  listaAssunto[i],
-                  style: const TextStyle(
-                    color: Color(0xFF39EBB0),
-                    fontFamily: 'Source Sans Pro',
-                    fontWeight: FontWeight.w600,
-                    fontSize: 17,
-                  ),
-                  ),
-        ),
-      );
-    }
+    ).toList();
 
     return Card(
       margin: const EdgeInsets.all(10),
@@ -48,7 +30,7 @@ class _SubjectScreen extends State<SubjectScreen> {
         child: ButtonTheme(
           alignedDropdown: true,
           child: DropdownButtonFormField<String>(                        
-            value: assuntosList[ordem],                   
+            value: listaAssunto[0],                   
             decoration: const InputDecoration(
                prefixIcon: Icon(Icons.keyboard_arrow_down_sharp),
                enabledBorder:InputBorder.none,
@@ -72,10 +54,10 @@ class _SubjectScreen extends State<SubjectScreen> {
       body: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            assuntosDropdown(0, matBasicaList),
-            assuntosDropdown(1, seriesSequenciaList),
-            assuntosDropdown(2, eqDiferenciaisList),
-            assuntosDropdown(3, transfLaplaceList),            
+            assuntosDropdown(matBasicaList),
+            assuntosDropdown(seriesSequenciaList),
+            assuntosDropdown(eqDiferenciaisList),
+            assuntosDropdown(transfLaplaceList),            
           ],
         ),
     );

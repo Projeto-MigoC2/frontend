@@ -5,8 +5,8 @@ platform :android do
   lane :distribute_android_app do
       firebase_app_distribution(
           app: ENV["FIREBASE_APP_ID_ANDROID"],
-          testers: ENV["ANDROID_TESTERS"],
-          release_notes: "Test",
+          groups:  ENV["ANDROID_TESTERS"],
+          release_notes: "../release-notes/release-note.txt",
           firebase_cli_token: ENV["FIREBASE_CLI_TOKEN"],
           apk_path: "../build/app/outputs/apk/release/app-release.apk"
       )

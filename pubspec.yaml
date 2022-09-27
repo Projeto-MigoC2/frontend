@@ -38,9 +38,9 @@ dependencies:
   shared_preferences: any
 
 dev_dependencies:
+  change_app_package_name: any
   flutter_test:
     sdk: flutter
-
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

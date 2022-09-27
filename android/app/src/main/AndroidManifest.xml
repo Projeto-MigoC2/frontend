@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.fga.migoc2.migoc2">
+    package="com.fga.migoC2">
    <application
         android:label="migoc2"
         android:name="${applicationName}"

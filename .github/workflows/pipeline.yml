@@ -23,7 +23,7 @@ jobs:
       - name: Install Flutter
         uses: subosito/flutter-action@v1
         with:
-         flutter-version: '1.24.0-6.0.pre'
+         flutter-version: '2.17.6.pre'
          channel: 'dev'
           
       - name: Install Firebase CLI

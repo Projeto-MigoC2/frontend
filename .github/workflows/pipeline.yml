@@ -2,7 +2,7 @@ name: Test Pipeline
 on:
   push:
     branches:
-    - test
+    - develop
 jobs:
   build:
     runs-on: macos-latest

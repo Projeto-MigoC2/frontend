@@ -10,36 +10,36 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         
-        - name: Install Ruby
-            uses: ruby/setup-ruby@v1
-            with:
-            ruby-version: '2.7'
+      - name: Install Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+         ruby-version: '2.7'
 
-        - name: Install Java
-            uses: actions/setup-java@v1
-            with:
-            java-version: '12.x'
+      - name: Install Java
+        uses: actions/setup-java@v1
+        with:
+         java-version: '12.x'
 
-        - name: Install Flutter
-            uses: subosito/flutter-action@v1
-            with:
-            flutter-version: '1.24.0-6.0.pre'
-            channel: 'dev'
+      - name: Install Flutter
+        uses: subosito/flutter-action@v1
+        with:
+         flutter-version: '1.24.0-6.0.pre'
+         channel: 'dev'
           
-        - name: Install Firebase CLI
-            uses: w9jds/firebase-action@master
+      - name: Install Firebase CLI
+        uses: w9jds/firebase-action@master
             
-        - name: Install Android Gems
-            working-directory: ${{ github.workspace }}/android
-            run: bundle install
+      - name: Install Android Gems
+        working-directory: ${{ github.workspace }}/android
+        run: bundle install
 
-        - name: Build APK
-            run: flutter build apk
+      - name: Build APK
+        run: flutter build apk
 
-        - name: Distribute Android Beta App
-            working-directory: ${{ github.workspace }}/android
-            run: bundle exec fastlane distribute_android_app
-            env:
-            FIREBASE_CLI_TOKEN: ${{ secrets.FIREBASE_CLI_TOKEN }}
-            FIREBASE_APP_ID_ANDROID: ${{ secrets.FIREBASE_APP_ID_ANDROID }}
-            ANDROID_TESTERS: ${{ secrets.ANDROID_TESTERS }}
+      - name: Distribute Android Beta App
+        working-directory: ${{ github.workspace }}/android
+        run: bundle exec fastlane distribute_android_app
+        env:
+          FIREBASE_CLI_TOKEN: ${{ secrets.FIREBASE_CLI_TOKEN }}
+          FIREBASE_APP_ID_ANDROID: ${{ secrets.FIREBASE_APP_ID_ANDROID }}
+          ANDROID_TESTERS: ${{ secrets.ANDROID_TESTERS }}

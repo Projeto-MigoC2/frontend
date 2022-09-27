@@ -5,7 +5,7 @@ on:
     - develop
 jobs:
   build:
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -40,6 +40,6 @@ jobs:
         working-directory: ${{ github.workspace }}/android
         run: bundle exec fastlane distribute_android_app
         env:
-          FIREBASE_CLI_TOKEN: ${{ secrets.FIREBASE_CLI_TOKEN }}
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_CLI_TOKEN }}
           FIREBASE_APP_ID_ANDROID: ${{ secrets.FIREBASE_APP_ID_ANDROID }}
           ANDROID_TESTERS: ${{ secrets.ANDROID_TESTERS }}

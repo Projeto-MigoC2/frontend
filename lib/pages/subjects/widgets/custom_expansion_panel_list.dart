@@ -8,9 +8,9 @@ class CustomExpansionPanelList extends StatelessWidget {
   
   const CustomExpansionPanelList(
       {
-      this.children: const <ExpansionPanel>[],
+      this.children = const <ExpansionPanel>[],
       required this.expansionCallback,
-      this.animationDuration = kThemeAnimationDuration});
+      this.animationDuration = kThemeAnimationDuration,});
 
   final List<ExpansionPanel> children;
 
@@ -26,7 +26,7 @@ class CustomExpansionPanelList extends StatelessWidget {
   Widget build(BuildContext context) {
     final List<Widget> items = <Widget>[];
     const EdgeInsets kExpandedEdgeInsets = EdgeInsets.symmetric(
-        vertical: _kPanelHeaderExpandedHeight - _kPanelHeaderCollapsedHeight);
+        vertical: _kPanelHeaderExpandedHeight - _kPanelHeaderCollapsedHeight,);
 
     for (int index = 0; index < children.length; index += 1) {
       if (_isChildExpanded(index) &&
@@ -36,7 +36,7 @@ class CustomExpansionPanelList extends StatelessWidget {
           key: _SaltedKey<BuildContext, int>(context, index * 2 - 1),
           height: 15.0,
           color: Colors.transparent,
-        ));
+        ),);
       }
 
       final Row header = Row(
@@ -47,9 +47,7 @@ class CustomExpansionPanelList extends StatelessWidget {
               isExpanded: _isChildExpanded(index),
               padding: const EdgeInsets.all(16.0),
               onPressed: (bool isExpanded) {
-                if (expansionCallback != null){
                   expansionCallback(index, isExpanded); 
-                }
               },
             ),
           ),
@@ -105,7 +103,7 @@ class CustomExpansionPanelList extends StatelessWidget {
         items.add(Divider(
           key: _SaltedKey<BuildContext, int>(context, index * 2 + 1),
           height: 15.0,
-        ));
+        ),);
       }
     }
 

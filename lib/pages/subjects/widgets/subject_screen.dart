@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:migoc2/pages/subjects/widgets/subject_button.dart';
+import 'package:migoc2/pages/subjects/widgets/common_text_field.dart';
+import 'package:migoc2/pages/subjects/widgets/custom_expansion_panel_list.dart';
+import 'package:migoc2/pages/subjects/widgets/item_data.dart';
 
 class SubjectScreen extends StatefulWidget {
   @override
@@ -7,61 +9,159 @@ class SubjectScreen extends StatefulWidget {
 }
 
 class _SubjectScreen extends State<SubjectScreen> {
-  
-  Card assuntosDropdown(List<String> listaAssunto){
-    
-    final List<DropdownMenuItem<String>> listaItens = listaAssunto.map((item) =>
-        DropdownMenuItem(
-                value: item,
-                child: Text(
-                  item,
-                  style: TextStyle(
-                    color: item == listaAssunto[0] ? const Color(0xFF000000) : const Color(0xff39EBB0),                    
-                  ),
-                ),
-        ),
-    ).toList();
-
-    return Card(
-      margin: const EdgeInsets.all(10),
-      child: SizedBox(
-        height: 56,
-        width: 344,
-        child: ButtonTheme(
-          alignedDropdown: true,
-          child: DropdownButtonFormField<String>(                        
-            value: listaAssunto[0],                   
-            decoration: const InputDecoration(
-               prefixIcon: Icon(Icons.keyboard_arrow_down_sharp),
-               enabledBorder:InputBorder.none,
-            ),
-            icon: const Visibility (visible:false, child: Icon(Icons.arrow_downward)),
-            alignment: Alignment.center,
-            items: listaItens,            
-            dropdownColor: const Color(0xFFFFFFFF),
-            borderRadius: BorderRadius.circular(10),
-            onChanged: (value) {                  
-            },
-          ),
-        ),
-      ),
-    );
-  } 
-  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            assuntosDropdown(matBasicaList),
-            assuntosDropdown(seriesSequenciaList),
-            assuntosDropdown(eqDiferenciaisList),
-            assuntosDropdown(transfLaplaceList),            
+      body: Container(
+        padding: const EdgeInsets.all(10),
+        child: Column(
+          children: [
+            const CommonTextField(textFieldHint: 'Pesquise um assunto'),
+            Expanded(
+              child: Scrollbar(
+                thickness: 0,
+                child: ListView.builder(
+                  itemCount: itemData.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return CustomExpansionPanelList(
+                      animationDuration: const Duration(milliseconds: 1000),
+                      children: [
+                        ExpansionPanel(
+                          body: Column(
+                            children: [
+                              Container(
+                                padding: const EdgeInsets.all(10),
+                                child: itemData[index].itens,
+                              ),
+                            ],
+                          ),
+                          headerBuilder:
+                              (BuildContext context, bool isExpanded) {
+                            return Container(
+                              padding: const EdgeInsets.all(10),
+                              child: Text(
+                                itemData[index].headerItem,
+                                style: const TextStyle(
+                                  fontSize: 18,
+                                ),
+                              ),
+                            );
+                          },
+                          isExpanded: itemData[index].expanded,
+                        ),
+                      ],
+                      expansionCallback: (int item, bool status) {
+                        setState(() {
+                          itemData[index].expanded = !itemData[index].expanded;
+                        });
+                      },
+                    );
+                  },
+                ),
+              ),
+            ),
           ],
         ),
+      ),
     );
   }
 }
 
-
+List<ItemModel> itemData = <ItemModel>[
+  ItemModel(
+    headerItem: 'Pré-Cálculo',
+    itens: Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: const [
+            Text(
+              'Pré-Cálculo: Resumo',
+              style: TextStyle(
+                color: Color(0xff39EBB0),
+                fontSize: 17,
+              ),
+            ),
+            Icon(
+              Icons.arrow_forward_ios_rounded,
+              color: Color(0xff39EBB0),
+              size: 13,
+            ),
+          ],
+        ),
+      ],
+    ),
+  ),
+  ItemModel(
+    headerItem: 'Séries e Sequências',
+    itens: Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: const [
+            Text(
+              'Séries e Sequências: Resumo',
+              style: TextStyle(
+                color: Color(0xff39EBB0),
+                fontSize: 17,
+              ),
+            ),
+            Icon(
+              Icons.arrow_forward_ios_rounded,
+              color: Color(0xff39EBB0),
+              size: 13,
+            ),
+          ],
+        ),
+      ],
+    ),
+  ),
+  ItemModel(
+    headerItem: 'Equações Diferenciais',
+    itens: Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: const [
+            Text(
+              'Equações Diferenciais: Resumo',
+              style: TextStyle(
+                color: Color(0xff39EBB0),
+                fontSize: 17,
+              ),
+            ),
+            Icon(
+              Icons.arrow_forward_ios_rounded,
+              color: Color(0xff39EBB0),
+              size: 13,
+            ),
+          ],
+        ),
+      ],
+    ),
+  ),
+  ItemModel(
+    headerItem: 'Transformada de Laplace',
+    itens: Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: const [
+            Text(
+              'Transformada de Laplace: Resumo',
+              style: TextStyle(
+                color: Color(0xff39EBB0),
+                fontSize: 17,
+              ),
+            ),
+            Icon(
+              Icons.arrow_forward_ios_rounded,
+              color: Color(0xff39EBB0),
+              size: 13,
+            ),
+          ],
+        ),
+      ],
+    ),
+  ),
+];

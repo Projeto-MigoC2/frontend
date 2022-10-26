@@ -5,12 +5,11 @@ const double _kPanelHeaderExpandedHeight = 64.0;
 
 @immutable
 class CustomExpansionPanelList extends StatelessWidget {
-  
-  const CustomExpansionPanelList(
-      {
-      this.children = const <ExpansionPanel>[],
-      required this.expansionCallback,
-      this.animationDuration = kThemeAnimationDuration,});
+  const CustomExpansionPanelList({
+    this.children = const <ExpansionPanel>[],
+    required this.expansionCallback,
+    this.animationDuration = kThemeAnimationDuration,
+  });
 
   final List<ExpansionPanel> children;
 
@@ -26,17 +25,20 @@ class CustomExpansionPanelList extends StatelessWidget {
   Widget build(BuildContext context) {
     final List<Widget> items = <Widget>[];
     const EdgeInsets kExpandedEdgeInsets = EdgeInsets.symmetric(
-        vertical: _kPanelHeaderExpandedHeight - _kPanelHeaderCollapsedHeight,);
+      vertical: _kPanelHeaderExpandedHeight - _kPanelHeaderCollapsedHeight,
+    );
 
     for (int index = 0; index < children.length; index += 1) {
       if (_isChildExpanded(index) &&
           index != 0 &&
           !_isChildExpanded(index - 1)) {
-        items.add(Divider(
-          key: _SaltedKey<BuildContext, int>(context, index * 2 - 1),
-          height: 15.0,
-          color: Colors.transparent,
-        ),);
+        items.add(
+          Divider(
+            key: _SaltedKey<BuildContext, int>(context, index * 2 - 1),
+            height: 15.0,
+            color: Colors.transparent,
+          ),
+        );
       }
 
       final Row header = Row(
@@ -47,7 +49,7 @@ class CustomExpansionPanelList extends StatelessWidget {
               isExpanded: _isChildExpanded(index),
               padding: const EdgeInsets.all(16.0),
               onPressed: (bool isExpanded) {
-                  expansionCallback(index, isExpanded); 
+                expansionCallback(index, isExpanded);
               },
             ),
           ),
@@ -73,10 +75,25 @@ class CustomExpansionPanelList extends StatelessWidget {
       items.add(
         Container(
           key: _SaltedKey<BuildContext, int>(context, index * 2),
-          margin: const EdgeInsets.symmetric(vertical: 10.0),
+          margin: const EdgeInsets.only(bottom: 10.0),
+          decoration: BoxDecoration(
+            borderRadius: const BorderRadius.all(Radius.circular(8.0)),
+            boxShadow: [
+              BoxShadow(
+                blurRadius: 4,
+                color: Colors.black.withOpacity(0.20),
+                offset: const Offset(0, 2),
+              ),
+              BoxShadow(
+                blurRadius: 2,
+                color: Colors.black.withOpacity(0.20),
+                offset: const Offset(0, 1),
+              )
+            ],
+          ),
           child: Material(
+            borderRadius: const BorderRadius.all(Radius.circular(8.0)),
             elevation: 2.0,
-            borderRadius: const BorderRadius.all(Radius.circular(10.0)),
             child: Column(
               children: <Widget>[
                 header,
@@ -100,10 +117,12 @@ class CustomExpansionPanelList extends StatelessWidget {
       );
 
       if (_isChildExpanded(index) && index != children.length - 1) {
-        items.add(Divider(
-          key: _SaltedKey<BuildContext, int>(context, index * 2 + 1),
-          height: 15.0,
-        ),);
+        items.add(
+          Divider(
+            key: _SaltedKey<BuildContext, int>(context, index * 2 + 1),
+            height: 15.0,
+          ),
+        );
       }
     }
 
@@ -124,9 +143,9 @@ class _SaltedKey<S, V> extends LocalKey {
     if (other.runtimeType != runtimeType) {
       return false;
     }
-    return other is _SaltedKey<S, V>
-        && other.salt == salt
-        && other.value == value;
+    return other is _SaltedKey<S, V> &&
+        other.salt == salt &&
+        other.value == value;
   }
 
   @override

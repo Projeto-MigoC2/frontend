@@ -1,8 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:migoc2/pages/base/navigation/provider/navigation_provider.dart';
-import 'package:migoc2/resources/dark_theme_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:unicons/unicons.dart';
 
@@ -24,16 +22,19 @@ class _BottomBarState extends State<_BottomBar> {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<NavigationProvider>(context);
-    return Container(
-      decoration: BoxDecoration(color: Colors.white, boxShadow: [
-        BoxShadow(blurRadius: 20, color: Colors.black.withOpacity(.10))
-      ]),
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(blurRadius: 20, color: Colors.black.withOpacity(.10))
+        ],
+      ),
       child: Padding(
         padding:
             const EdgeInsets.only(left: 10.0, right: 10, top: 15.0, bottom: 25),
         child: GNav(
           selectedIndex: provider.selectedIndex,
-          textStyle: TextStyle(
+          textStyle: const TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w600,
             color: Colors.white,
@@ -43,7 +44,11 @@ class _BottomBarState extends State<_BottomBar> {
           color: Colors.black,
           activeColor: Colors.white,
           tabBackgroundGradient: LinearGradient(
-              colors: [Theme.of(context).primaryColor, Color(0xffb996fd)]),
+            colors: [
+              Theme.of(context).primaryColor,
+              const Color(0xffb996fd),
+            ],
+          ),
           tabBorderRadius: 20,
           gap: 10,
           onTabChange: provider.bottomTapped,

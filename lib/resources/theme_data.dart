@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:migoc2/resources/colors_extensions.dart';
 
-ThemeData themeData(
-    {required bool isDarkTheme, required BuildContext context}) {
+ThemeData themeData({
+  required bool isDarkTheme,
+  required BuildContext context,
+}) {
   return ThemeData(
     inputDecorationTheme: const InputDecorationTheme(
       filled: true,
@@ -22,10 +24,10 @@ ThemeData themeData(
       selectedItemColor: UIColors.secondaryColor,
       unselectedItemColor: UIColors.unselectedColor,
       backgroundColor: UIColors.primaryColor,
-      unselectedLabelStyle: TextStyle(
+      unselectedLabelStyle: const TextStyle(
         fontSize: 16,
       ),
-      selectedLabelStyle: TextStyle(
+      selectedLabelStyle: const TextStyle(
         fontSize: 16,
       ),
     ),

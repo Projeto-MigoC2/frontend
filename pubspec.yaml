@@ -32,13 +32,15 @@ dependencies:
     sdk: flutter
   flutter_lints: ^2.0.0
   flutter_svg: ^1.1.5
-  http: 
+  google_nav_bar: ^5.0.6
+  http: any
   lint:  any
   logging: ^1.0.0
   provider: any
   rxdart: ^0.27.5
   shared_preferences: ^2.0.15
   shimmer: ^2.0.0
+  unicons: any
 
 dev_dependencies:
   change_app_package_name: any

@@ -42,38 +42,42 @@ class _SearchPageState extends State<SearchPage> {
   Widget build(BuildContext context) {
     final provider = Provider.of<SearchProvider>(context);
     return Scaffold(
-      body: Container(
-        padding: const EdgeInsets.all(10),
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(
-                top: 25,
-                right: 22,
-                left: 22,
-                bottom: 40,
-              ),
-              child: CommonTextField(
-                textFieldHint: 'Procurar',
-                action: () {
-                  provider.searchConteudo(_textController.text);
-                },
-                textController: _textController,
-              ),
+      body: Column(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(10),
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(
+                    top: 25,
+                    right: 22,
+                    left: 22,
+                    bottom: 40,
+                  ),
+                  child: CommonTextField(
+                    textFieldHint: 'Procurar',
+                    action: () {
+                      provider.searchConteudo(_textController.text);
+                    },
+                    textController: _textController,
+                  ),
+                ),
+                Consumer<SearchProvider>(
+                  builder: (context, value, child) {
+                    if (value.loading) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 22),
+                        child: LoadingBox(),
+                      );
+                    }
+                    return content(context);
+                  },
+                )
+              ],
             ),
-            Consumer<SearchProvider>(
-              builder: (context, value, child) {
-                if (value.loading) {
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 22),
-                    child: LoadingBox(),
-                  );
-                }
-                return content(context);
-              },
-            )
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

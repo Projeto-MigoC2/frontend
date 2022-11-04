@@ -16,7 +16,7 @@ class AppBase extends StatefulWidget {
 }
 
 class _AppBaseState extends State<AppBase> {
-  List<String> titles = ['Início', 'Pesquisar', 'Assuntos'];
+  List<String> titles = ['Início', 'Pesquisar', 'Assuntos', 'Configurações'];
   static const String appTitle = 'migoC2';
 
   List<Widget> pages = [const HomePage(), const SearchPage(), SubjectScreen()];
@@ -31,10 +31,11 @@ class _AppBaseState extends State<AppBase> {
       home: Builder(
         builder: (BuildContext context) {
           return Scaffold(
-            appBar: AppBar(title: Text(titles[provider.selectedIndex])),
+            appBar: AppBar(
+              title: Text(titles[provider.selectedIndex]),
+            ),
             body: PageView(
               controller: pageController,
-              onPageChanged: provider.onItemTapped,
               children: pages,
             ),
             bottomNavigationBar: const BottomBar(),

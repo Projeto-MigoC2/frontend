@@ -1,18 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:math_keyboard/math_keyboard.dart';
 import 'package:migoc2/resources/colors_extensions.dart';
 
-@immutable
-class CommonTextField extends StatelessWidget {
+class CommonTextField extends StatefulWidget {
   final String textFieldHint;
   final VoidCallback? action;
-  final TextEditingController? textController;
   final FocusNode focus = FocusNode();
+  MathFieldEditingController mathTextController;
+  TextEditingController textController;
+  bool isMath;
 
   CommonTextField({
     required this.textFieldHint,
-    this.action,
-    this.textController,
+    required this.isMath,
+    required this.action,
+    required this.mathTextController,
+    required this.textController,
+    super.key,
   });
+
+  @override
+  State<CommonTextField> createState() => _CommonTextField();
+}
+
+
+class _CommonTextField extends State<CommonTextField> {
 
   @override
   Widget build(BuildContext context) {
@@ -32,51 +44,101 @@ class CommonTextField extends StatelessWidget {
           )
         ],
       ),
-      child: TextField(
-        onTap: () => FocusScope.of(context).requestFocus(focus),
-        focusNode: focus,
-        style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w700),
-        decoration: InputDecoration(
-          focusColor: Colors.black,
-          hintText: textFieldHint,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8),
-            borderSide: BorderSide.none,
+      child: widget.isMath ? mathTextField(context) : textField(context),
+    );//
+  }
+
+  Widget mathTextField(BuildContext context) {
+    return MathField(
+      controller: widget.mathTextController,
+      variables: const ['x', 'dx', '\\int', '\\sum_{}'],
+      decoration: InputDecoration(
+        focusColor: Theme.of(context).focusColor,
+        hintText: widget.textFieldHint,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: BorderSide.none,
+        ),
+        suffixIcon: Ink(
+          decoration: const ShapeDecoration(
+            color: Color(0xFF8C52FF),
+            shape: CircleBorder(),
           ),
-          suffixIcon: Ink(
-            decoration: const ShapeDecoration(
-              color: Color(0xFF8C52FF),
-              shape: CircleBorder(),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.only(right: 10),
-              child: Container(
-                height: 15,
-                width: 15,
-                decoration: BoxDecoration(
-                  color: UIColors.primaryColor,
-                  shape: BoxShape.circle,
-                ),
-                child: IconButton(
-                  onPressed: action,
-                  color: const Color(0xff39EBB0),
-                  iconSize: 13,
-                  icon: const Icon(Icons.arrow_forward_ios_rounded),
-                ),
+          child: Padding(
+            padding: const EdgeInsets.only(right: 10),
+            child: Container(
+              height: 15,
+              width: 15,
+              decoration: BoxDecoration(
+                color: UIColors.primaryColor,
+                shape: BoxShape.circle,
+              ),
+              child: IconButton(
+                onPressed: widget.action,
+                color: const Color(0xff39EBB0),
+                iconSize: 13,
+                icon: const Icon(Icons.arrow_forward_ios_rounded),
               ),
             ),
           ),
-          prefixIcon: Padding(
-            padding: const EdgeInsets.only(left: 18, right: 29),
-            child: Icon(
-              Icons.search,
-              size: 30.0,
-              color: focus.hasFocus ? Colors.black : null,
-            ),
+        ),
+        prefixIcon: Padding(
+          padding: const EdgeInsets.only(left: 18, right: 29),
+          child: Icon(
+            Icons.search,
+            size: 30.0,
+            color: widget.focus.hasFocus ? Theme.of(context).focusColor : null,
           ),
         ),
-        controller: textController,
       ),
+      focusNode: widget.focus,
     );
+  }
+
+  Widget textField(BuildContext context) {
+     return TextField(
+         controller: widget.textController,
+         onTap: () => FocusScope.of(context).requestFocus(widget.focus),
+         focusNode: widget.focus,
+         decoration: InputDecoration(
+           focusColor: Theme.of(context).focusColor,
+           hintText: widget.textFieldHint,
+           border: OutlineInputBorder(
+             borderRadius: BorderRadius.circular(8),
+             borderSide: BorderSide.none,
+           ),
+           suffixIcon: Ink(
+             decoration: const ShapeDecoration(
+               color: Color(0xFF8C52FF),
+               shape: CircleBorder(),
+             ),
+             child: Padding(
+               padding: const EdgeInsets.only(right: 10),
+               child: Container(
+                 height: 15,
+                 width: 15,
+                 decoration: BoxDecoration(
+                   color: UIColors.primaryColor,
+                   shape: BoxShape.circle,
+                 ),
+                 child: IconButton(
+                   onPressed: widget.action,
+                   color: const Color(0xff39EBB0),
+                   iconSize: 13,
+                   icon: const Icon(Icons.arrow_forward_ios_rounded),
+                 ),
+               ),
+             ),
+           ),
+           prefixIcon: Padding(
+             padding: const EdgeInsets.only(left: 18, right: 29),
+             child: Icon(
+               Icons.search,
+               size: 30.0,
+               color: widget.focus.hasFocus ? Theme.of(context).focusColor : null,
+             ),
+           ),
+         ),
+       );
   }
 }

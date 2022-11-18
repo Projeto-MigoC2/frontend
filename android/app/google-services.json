@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "274322461331",
+    "project_id": "migoc2",
+    "storage_bucket": "migoc2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:274322461331:android:325d7f25900a89e8b0b366",
+        "android_client_info": {
+          "package_name": "com.fga.migoC2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "274322461331-bndptfcj98t6o9b09dj4so8vb9kqf2m7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCi6LcvCsdpb8lOKF0g1QMakjN61YsR2M8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "274322461331-bndptfcj98t6o9b09dj4so8vb9kqf2m7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

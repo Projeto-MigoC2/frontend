@@ -6,9 +6,17 @@ ThemeData themeData({
   required BuildContext context,
 }) {
   return ThemeData(
-    inputDecorationTheme: const InputDecorationTheme(
+    primaryTextTheme: TextTheme(
+      bodyText1: TextStyle(
+        fontFamily: 'Source Sans Pro',
+        fontSize: 20,
+        fontWeight: FontWeight.w500,
+        color: isDarkTheme ? UIColors.darkFontColor : UIColors.lightFontColor,
+      ),
+    ),
+    inputDecorationTheme: InputDecorationTheme(
       filled: true,
-      fillColor: Colors.white,
+      fillColor: isDarkTheme ? UIColors.darkBoxColor : UIColors.lightBoxColor,
       hintStyle: TextStyle(
         color: Color(0xffA1A1A1),
       ),
@@ -34,6 +42,7 @@ ThemeData themeData({
     backgroundColor: isDarkTheme
         ? UIColors.darkBackgroundColor
         : UIColors.lightBackgroundColor,
+    focusColor: isDarkTheme ? UIColors.darkFontColor : UIColors.lightFontColor,
     appBarTheme: AppBarTheme(
       backgroundColor: UIColors.primaryColor,
       centerTitle: true,
@@ -47,4 +56,10 @@ ThemeData themeData({
         ? UIColors.darkBackgroundColor
         : UIColors.lightBackgroundColor,
   );
+}
+
+extension MigoColorScheme on ColorScheme {
+  Color get boxColor => brightness == Brightness.light
+      ? UIColors.lightBoxColor
+      : UIColors.darkBoxColor;
 }

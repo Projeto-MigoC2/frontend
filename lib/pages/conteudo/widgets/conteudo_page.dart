@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:migoc2/models/conteudo_model.dart';
+import 'package:flutter_tex/flutter_tex.dart';
+import 'package:migoc2/pages/conteudo/models/conteudo_model.dart';
 import 'package:migoc2/resources/colors_extensions.dart';
+import 'package:migoc2/resources/theme_data.dart';
 
 class ConteudoPage extends StatefulWidget {
   const ConteudoPage({super.key, required this.conteudo});
@@ -14,64 +16,58 @@ class _ConteudoPage extends State<ConteudoPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-              alignment: Alignment.center,
-              child: Padding(
-                padding: const EdgeInsets.only(top: 20),
-                child: Text(
-                  widget.conteudo.titulo!,
+      body: Ink(
+        child: Center(
+          child: CustomScrollView(
+            keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+            slivers: [
+              SliverAppBar.large(
+                title: Text(
+                  widget.conteudo.nome!,
                   style: TextStyle(
                     fontWeight: FontWeight.w700,
-                    fontSize: 32,
+                    fontSize: 25,
+                    fontFamily: Theme.of(context)
+                        .primaryTextTheme
+                        .bodyText1
+                        ?.fontFamily,
                     color: UIColors.secondaryColor,
                   ),
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-              child: RichText(
-                textAlign: TextAlign.justify,
-                text: TextSpan(
-                  children: <TextSpan>[
-                    TextSpan(
-                      text: 'Resumo: ',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w700,
-                        fontSize: 14,
-                        color: Colors.grey.shade600,
-                      ),
-                    ),
-                    TextSpan(
-                      text: widget.conteudo.resumo,
-                      style: TextStyle(
-                        fontWeight: FontWeight.w400,
-                        fontSize: 14,
-                        color: Colors.grey.shade600,
+              SliverList(
+                delegate: SliverChildListDelegate(
+                  [
+                    SafeArea(
+                      top: true,
+                      child: TeXView(
+                        renderingEngine: const TeXViewRenderingEngine.katex(),
+                        child: TeXViewDocument(widget.conteudo.corpo!),
+                        style: TeXViewStyle(
+                          backgroundColor: Theme.of(context).backgroundColor,
+                          contentColor: Theme.of(context)
+                              .primaryTextTheme
+                              .bodyText1
+                              ?.color,
+                          padding: const TeXViewPadding.only(
+                            left: 20,
+                            right: 20,
+                          ),
+                          fontStyle: TeXViewFontStyle(
+                            fontSize: 20,
+                            fontFamily: 'Source Sans Pro',
+                            fontWeight: TeXViewFontWeight.w500,
+                          ),
+                        ),
                       ),
                     ),
                   ],
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 10, left: 20),
-              child: Text(
-                widget.conteudo.elaboracao!,
-                style: const TextStyle(
-                  fontWeight: FontWeight.w400,
-                  fontSize: 17,
-                ),
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
-      backgroundColor: Colors.white,
     );
   }
 }

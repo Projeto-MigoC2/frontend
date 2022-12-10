@@ -66,7 +66,7 @@ class _BottomBarState extends State<_BottomBar> {
             ),
             GButton(
               icon: UniconsLine.books,
-              text: 'Assuntos',
+              text: 'Módulos',
             ),
             GButton(
               icon: UniconsLine.setting,

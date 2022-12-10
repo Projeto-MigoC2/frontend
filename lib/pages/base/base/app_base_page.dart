@@ -19,7 +19,7 @@ class AppBase extends StatefulWidget {
 }
 
 class _AppBaseState extends State<AppBase> {
-  List<String> titles = ['Início', 'Pesquisar', 'Assuntos', 'Ajustes'];
+  List<String> titles = ['Início', 'Pesquisar', 'Módulos', 'Ajustes'];
   static const String appTitle = 'migoC2';
 
   List<Widget> pages = [

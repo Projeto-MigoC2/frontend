@@ -5,7 +5,6 @@ import 'package:migoc2/core/widgets/loading_box.dart';
 import 'package:migoc2/pages/conteudo/models/conteudo_model.dart';
 import 'package:migoc2/pages/conteudo/widgets/conteudo_page.dart';
 import 'package:migoc2/pages/modulos/providers/modulos_provider.dart';
-import 'package:migoc2/pages/search/provider/search_provider.dart';
 import 'package:provider/provider.dart';
 
 class ModulosPage extends StatefulWidget {
@@ -14,7 +13,6 @@ class ModulosPage extends StatefulWidget {
 }
 
 class _ModulosPage extends State<ModulosPage> {
-  final _textController = TextEditingController();
   @override
   void initState() {
     super.initState();
@@ -26,7 +24,6 @@ class _ModulosPage extends State<ModulosPage> {
 
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<SearchProvider>(context);
     return Scaffold(
       resizeToAvoidBottomInset: true,
       body: SingleChildScrollView(
@@ -37,7 +34,7 @@ class _ModulosPage extends State<ModulosPage> {
                 builder: (context, value, child) {
                   if (value.loading) {
                     return Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 22),
+                      padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 25),
                       child: LoadingBox(),
                     );
                   } else if (value.assuntoError != null) {
@@ -64,21 +61,23 @@ class _ModulosPage extends State<ModulosPage> {
 
   Widget content(BuildContext context) {
     final provider = Provider.of<ModulosProvider>(context);
-    return ListView.builder(
-      shrinkWrap: true,
-      itemCount: provider.assuntoModelList.length,
-      itemBuilder: (BuildContext context, int index) {
-        return Padding(
-          padding: const EdgeInsets.fromLTRB(20, 20, 20, 50),
-          child: CustomExpansionPanelList(
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(20, 25, 20, 0),
+      child: ListView.builder(
+        physics: const NeverScrollableScrollPhysics(),
+        shrinkWrap: true,
+        itemCount: provider.assuntoModelList.length,
+        itemBuilder: (BuildContext context, int builderIndex) {
+          return CustomExpansionPanelList(
             animationDuration: const Duration(milliseconds: 500),
             children: [
               ExpansionPanel(
+                isExpanded: provider.assuntoModelList[builderIndex].expanded,
                 body: Align(
                   alignment: Alignment.centerLeft,
                   child: ListView.builder(
                     shrinkWrap: true,
-                    itemCount: provider.assuntoModelList[index].itens.length,
+                    itemCount: provider.assuntoModelList[builderIndex].itens.length,
                     itemBuilder: (BuildContext context, int index2) {
                       return Padding(
                         padding: const EdgeInsets.only(left: 10),
@@ -86,13 +85,13 @@ class _ModulosPage extends State<ModulosPage> {
                           alignment: Alignment.centerLeft,
                           child: TextButton(
                             onPressed: (){
-                              tappedContent(provider.assuntoList[index].conteudos![index2], context);
+                              tappedContent(provider.assuntoList[builderIndex].conteudos![index2], context);
                             },
                             child: Text(
-                              provider.assuntoModelList[index].itens[index2],
-                              style: TextStyle(
+                              provider.assuntoModelList[builderIndex].itens[index2],
+                              style: const TextStyle(
                                   fontSize: 17,
-                                  fontWeight: FontWeight.w600
+                                  fontWeight: FontWeight.w600,
                               ),
                             ),
                           ),
@@ -103,9 +102,9 @@ class _ModulosPage extends State<ModulosPage> {
                 ),
                 headerBuilder: (BuildContext context, bool isExpanded) {
                   return Container(
-                    padding: const EdgeInsets.all(10),
+                    padding: const EdgeInsets.only(top: 10),
                     child: Text(
-                      provider.assuntoModelList[index].headerItem,
+                      provider.assuntoModelList[builderIndex].headerItem,
                       style: const TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w700,
@@ -113,15 +112,14 @@ class _ModulosPage extends State<ModulosPage> {
                     ),
                   );
                 },
-                isExpanded: provider.assuntoModelList[index].expanded,
               ),
             ],
             expansionCallback: (int index, bool value) {
-              provider.setExpandedData(index);
+              provider.setExpandedData(builderIndex);
             },
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 }

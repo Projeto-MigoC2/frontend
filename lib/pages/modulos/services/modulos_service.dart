@@ -1,9 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
-import 'package:http/http.dart';
+import 'package:migoc2/resources/commons/urls.dart';
 
 class ModulosService {
-  final baseURL = 'http://3.86.106.14';
+  final baseURL = CommonURLs.server;
   final client = http.Client();
 
   Future<http.Response?> getModulos() async {
@@ -13,7 +13,7 @@ class ModulosService {
     try {
       final response = await client.get(url);
       return response;
-    } on ClientException catch (error) {
+    } on http.ClientException catch (error) {
       if (kDebugMode) {
         print(error);
         return null;

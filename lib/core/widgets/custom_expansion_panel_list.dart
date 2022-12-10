@@ -75,7 +75,7 @@ class CustomExpansionPanelList extends StatelessWidget {
       items.add(
         Container(
           key: _SaltedKey<BuildContext, int>(context, index * 2),
-          margin: const EdgeInsets.only(bottom: 10.0),
+          margin: const EdgeInsets.only(bottom: 18.0),
           decoration: BoxDecoration(
             borderRadius: const BorderRadius.all(Radius.circular(8.0)),
             boxShadow: [

@@ -100,7 +100,9 @@ class ModulosProvider extends ChangeNotifier {
   }
 
   void setExpandedData(int index) {
+    print(index);
     _listAssuntos[index].expanded = !_listAssuntos[index].expanded;
+    print(_listAssuntos[index].headerItem);
     notifyListeners();
   }
 }

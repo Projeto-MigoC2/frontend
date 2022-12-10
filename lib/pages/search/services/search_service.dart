@@ -1,11 +1,12 @@
 import 'package:http/http.dart' as http;
+import 'package:migoc2/resources/commons/urls.dart';
 
 class SearchService {
-  final baseURL = 'http://3.86.106.14';
+  final baseURL = CommonURLs.server;
   final client = http.Client();
 
   Future<http.Response> searchSubject(String texto) async {
-    final uri = Uri.parse('$baseURL/conteudos').replace(
+    final uri = Uri.parse('$baseURL/conteudos/pesquisa').replace(
       queryParameters: {
         'texto': texto,
       },

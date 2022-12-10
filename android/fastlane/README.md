@@ -15,13 +15,13 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 ## Android
 
-### android deploy
+### android distribute_android_app
 
 ```sh
-[bundle exec] fastlane android deploy
+[bundle exec] fastlane android distribute_android_app
 ```
 
-Deploy to Firebase
+Distribute Android App for Beta Testing
 
 ----
 

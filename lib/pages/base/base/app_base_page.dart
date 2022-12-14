@@ -50,7 +50,7 @@ class _AppBaseState extends State<AppBase> {
                         onPressed: (){
                           searchProvider.setIsMathKeyboardEnabled(enabled: !searchProvider.isMathKeyboardEnabled);
                         },
-                        icon: Icon(searchProvider.isMathKeyboardEnabled ? UniconsLine.calculator : UniconsLine.keyboard)
+                        icon: Icon(searchProvider.isMathKeyboardEnabled ? UniconsLine.calculator : UniconsLine.keyboard),
                     ),
                 ),
               ],

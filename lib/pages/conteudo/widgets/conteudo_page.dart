@@ -43,7 +43,7 @@ class _ConteudoPage extends State<ConteudoPage> {
                         TextButton(
                           onPressed: () => {
                             Navigator.push(context, 
-                              MaterialPageRoute(builder: (context) => const GraficoPage()))
+                              MaterialPageRoute(builder: (context) => const GraficoPage()),)
                           }, 
                           child: const Text('Gráfico'),),
                         SafeArea(

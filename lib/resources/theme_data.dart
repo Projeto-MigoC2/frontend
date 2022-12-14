@@ -17,11 +17,11 @@ ThemeData themeData({
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
       fillColor: isDarkTheme ? UIColors.darkBoxColor : UIColors.lightBoxColor,
-      hintStyle: TextStyle(
+      hintStyle: const TextStyle(
         color: Color(0xffA1A1A1),
       ),
-      prefixIconColor: Color(0xffA1A1A1),
-      border: OutlineInputBorder(
+      prefixIconColor: const Color(0xffA1A1A1),
+      border: const OutlineInputBorder(
         borderRadius: BorderRadius.all(Radius.circular(10.0)),
         borderSide: BorderSide.none,
       ),

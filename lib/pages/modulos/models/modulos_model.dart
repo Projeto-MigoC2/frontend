@@ -1,3 +1,5 @@
+
+
 import 'package:migoc2/pages/conteudo/models/conteudo_model.dart';
 class Modulo {
   String? id;
@@ -16,6 +18,7 @@ class Modulo {
         id: json['id'] as String?,
         nome: json['nome'] as String?,
         exemplo: json['exemplo'] as String?,
+        // ignore: avoid_dynamic_calls
         conteudos: json['conteudos'] != null ? json['conteudos'].map<Conteudo>((json) => Conteudo.fromJson(json as Map<String, dynamic>)).toList() as List<Conteudo>?  : null,
       );
 

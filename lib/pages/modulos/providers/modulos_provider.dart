@@ -70,6 +70,7 @@ class ModulosProvider extends ChangeNotifier {
     final List<ItemModel> listItemModel = [];
     for (var i = 0; i < assuntos.length; i++) {
       final contents = assuntos[i].conteudos?.map<String>((conteudo) => conteudo.nome!).toList();
+      // ignore: unused_local_variable
       final contentList = assuntos[i]
           .conteudos
           ?.map<Widget>(
@@ -79,9 +80,9 @@ class ModulosProvider extends ChangeNotifier {
                 onPressed: (){},
                 child: Text(
                     conteudo.nome!,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 17,
-                    fontWeight: FontWeight.w600
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
               ),
@@ -100,8 +101,10 @@ class ModulosProvider extends ChangeNotifier {
   }
 
   void setExpandedData(int index) {
+    // ignore: avoid_print
     print(index);
     _listAssuntos[index].expanded = !_listAssuntos[index].expanded;
+    // ignore: avoid_print
     print(_listAssuntos[index].headerItem);
     notifyListeners();
   }

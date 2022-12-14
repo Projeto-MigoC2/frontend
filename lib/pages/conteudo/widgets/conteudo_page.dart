@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tex/flutter_tex.dart';
 import 'package:migoc2/pages/conteudo/models/conteudo_model.dart';
+import 'package:migoc2/pages/conteudo/widgets/grafico_page.dart';
 import 'package:migoc2/resources/colors_extensions.dart';
-import 'package:migoc2/resources/theme_data.dart';
 
 class ConteudoPage extends StatefulWidget {
   const ConteudoPage({super.key, required this.conteudo});
@@ -38,28 +38,37 @@ class _ConteudoPage extends State<ConteudoPage> {
               SliverList(
                 delegate: SliverChildListDelegate(
                   [
-                    SafeArea(
-                      top: true,
-                      child: TeXView(
-                        renderingEngine: const TeXViewRenderingEngine.katex(),
-                        child: TeXViewDocument(widget.conteudo.corpo!),
-                        style: TeXViewStyle(
-                          backgroundColor: Theme.of(context).backgroundColor,
-                          contentColor: Theme.of(context)
-                              .primaryTextTheme
-                              .bodyText1
-                              ?.color,
-                          padding: const TeXViewPadding.only(
-                            left: 20,
-                            right: 20,
-                          ),
-                          fontStyle: TeXViewFontStyle(
-                            fontSize: 20,
-                            fontFamily: 'Source Sans Pro',
-                            fontWeight: TeXViewFontWeight.w500,
+                    Column(
+                      children: [
+                        TextButton(
+                          onPressed: () => {
+                            Navigator.push(context, 
+                              MaterialPageRoute(builder: (context) => const GraficoPage()))
+                          }, 
+                          child: const Text('Gráfico'),),
+                        SafeArea(
+                          child: TeXView(
+                            renderingEngine: const TeXViewRenderingEngine.katex(),
+                            child: TeXViewDocument(widget.conteudo.corpo!),
+                            style: TeXViewStyle(
+                              backgroundColor: Theme.of(context).backgroundColor,
+                              contentColor: Theme.of(context)
+                                  .primaryTextTheme
+                                  .bodyText1
+                                  ?.color,
+                              padding: const TeXViewPadding.only(
+                                left: 20,
+                                right: 20,
+                              ),
+                              fontStyle: TeXViewFontStyle(
+                                fontSize: 20,
+                                fontFamily: 'Source Sans Pro',
+                                fontWeight: TeXViewFontWeight.w500,
+                              ),
+                            ),
                           ),
                         ),
-                      ),
+                      ],
                     ),
                   ],
                 ),

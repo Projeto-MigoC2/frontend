@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:migoc2/resources/colors_extensions.dart';
+import 'package:migoc2/resources/theme_data.dart';
 
 @immutable
 class SearchCard extends StatelessWidget {
   final String title;
-  final String resume;
 
-  const SearchCard({required this.title, required this.resume});
+  const SearchCard({required this.title});
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      constraints: const BoxConstraints(
+        minHeight: 150,
+      ),
       width: 340,
-      height: 250,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.boxColor,
         borderRadius: const BorderRadius.all(Radius.circular(8.0)),
         boxShadow: [
           BoxShadow(
@@ -29,28 +31,23 @@ class SearchCard extends StatelessWidget {
           )
         ],
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 22, left: 22),
-            child: Text(
-              title,
-              style: TextStyle(
-                fontWeight: FontWeight.w700,
-                fontSize: 28,
-                color: UIColors.secondaryColor,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 15),
+        child: Align(
+          alignment: Alignment.centerLeft,
+          child:
+            Padding(
+              padding: const EdgeInsets.only(left: 22),
+              child: Text(
+                title,
+                style: TextStyle(
+                  fontWeight: FontWeight.w700,
+                  fontSize: 22,
+                  color: UIColors.secondaryColor,
+                ),
               ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 22),
-            child: Text(
-              resume,
-              style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 17),
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }

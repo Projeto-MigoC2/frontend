@@ -3,6 +3,7 @@ import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:migoc2/pages/base/navigation/provider/navigation_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:unicons/unicons.dart';
+import 'package:migoc2/resources/theme_data.dart';
 
 class BottomBar extends StatelessWidget {
   const BottomBar({super.key});
@@ -24,25 +25,28 @@ class _BottomBarState extends State<_BottomBar> {
     final provider = Provider.of<NavigationProvider>(context);
     return DecoratedBox(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.boxColor,
         boxShadow: [
           BoxShadow(blurRadius: 20, color: Colors.black.withOpacity(.10))
         ],
       ),
       child: Padding(
-        padding:
-            const EdgeInsets.only(left: 10.0, right: 10, top: 15.0, bottom: 25),
+        padding: const EdgeInsets.only(
+          top: 15.0,
+          bottom: 25,
+        ),
         child: GNav(
           selectedIndex: provider.selectedIndex,
-          textStyle: const TextStyle(
-            fontSize: 16,
+          textStyle: TextStyle(
+            fontSize: 15,
             fontWeight: FontWeight.w600,
-            color: Colors.white,
+            color: Theme.of(context).backgroundColor,
           ),
-          backgroundColor: Colors.white,
+          gap: 5,
+          backgroundColor: Theme.of(context).colorScheme.boxColor,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          color: Colors.black,
-          activeColor: Colors.white,
+          color: Theme.of(context).focusColor,
+          activeColor: Theme.of(context).backgroundColor,
           tabBackgroundGradient: LinearGradient(
             colors: [
               Theme.of(context).primaryColor,
@@ -50,7 +54,6 @@ class _BottomBarState extends State<_BottomBar> {
             ],
           ),
           tabBorderRadius: 20,
-          gap: 10,
           onTabChange: provider.bottomTapped,
           tabs: const [
             GButton(
@@ -63,7 +66,7 @@ class _BottomBarState extends State<_BottomBar> {
             ),
             GButton(
               icon: UniconsLine.books,
-              text: 'Assuntos',
+              text: 'Módulos',
             ),
             GButton(
               icon: UniconsLine.setting,
@@ -73,43 +76,5 @@ class _BottomBarState extends State<_BottomBar> {
         ),
       ),
     );
-    // return Consumer<DarkThemeProvider>(
-    //   builder: (context, theme, child) => DecoratedBox(
-    //     decoration: const BoxDecoration(
-    //       borderRadius: BorderRadius.only(
-    //         topRight: Radius.circular(12),
-    //         topLeft: Radius.circular(12),
-    //       ),
-    //       boxShadow: [BoxShadow(color: Colors.black38, blurRadius: 6)],
-    //     ),
-    //     child: ClipRRect(
-    //       borderRadius: const BorderRadius.only(
-    //         topLeft: Radius.circular(12.0),
-    //         topRight: Radius.circular(12.0),
-    //       ),
-    //       child: BottomNavigationBar(
-    //         type: BottomNavigationBarType.fixed,
-    //         items: <BottomNavigationBarItem>[
-    //           const BottomNavigationBarItem(
-    //             icon: Icon(
-    //               CupertinoIcons.search,
-    //             ),
-    //             label: 'Pesquisar',
-    //           ),
-    //           BottomNavigationBarItem(
-    //             icon: Icon(
-    //               context.watch<NavigationProvider>().selectedIndex == 1
-    //                   ? CupertinoIcons.book_fill
-    //                   : CupertinoIcons.book,
-    //             ),
-    //             label: 'Assuntos',
-    //           )
-    //         ],
-    //         currentIndex: context.watch<NavigationProvider>().selectedIndex,
-    //         onTap: context.watch<NavigationProvider>().bottomTapped,
-    //       ),
-    //     ),
-    //   ),
-    // );
   }
 }

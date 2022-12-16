@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:migoc2/resources/theme_data.dart';
 import 'package:shimmer/shimmer.dart';
 
 class LoadingBox extends StatefulWidget {
@@ -14,7 +15,7 @@ class _LoadingBox extends State<LoadingBox> {
       margin: const EdgeInsets.only(bottom: 20.0),
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.all(Radius.circular(10.0)),
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.boxColor,
         boxShadow: [
           BoxShadow(
             blurRadius: 4.0,

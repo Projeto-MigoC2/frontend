@@ -1,20 +1,23 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:migoc2/pages/assuntos/models/assunto_error.dart';
-import 'package:migoc2/pages/assuntos/models/assunto_model.dart';
-import 'package:migoc2/pages/assuntos/services/assuntos_service.dart';
-import 'package:migoc2/pages/assuntos/widgets/item_model.dart';
+import 'package:migoc2/pages/modulos/models/assunto_error.dart';
+import 'package:migoc2/pages/modulos/models/modulos_model.dart';
+import 'package:migoc2/pages/modulos/services/modulos_service.dart';
+import 'package:migoc2/pages/modulos/widgets/item_model.dart';
 
-class SubjectsProvider extends ChangeNotifier {
+class ModulosProvider extends ChangeNotifier {
   bool _loading = false;
-  List<Assunto> _assuntoList = [];
+  List<Modulo> _assuntoList = [];
   AssuntoError? _assuntoError;
-  AssuntoService service = AssuntoService();
+  ModulosService service = ModulosService();
   List<ItemModel> _listAssuntos = [];
 
   bool get loading => _loading;
-  List<Assunto> get assuntoList => _assuntoList;
+
+  List<Modulo> get assuntoList => _assuntoList;
+
   AssuntoError? get assuntoError => _assuntoError;
+
   List<ItemModel> get assuntoModelList => _listAssuntos;
 
   Future<void> setLoading({required bool loading}) async {
@@ -22,7 +25,7 @@ class SubjectsProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setAssuntoListModel(List<Assunto> assuntoListModel) {
+  void setAssuntoListModel(List<Modulo> assuntoListModel) {
     _assuntoList = assuntoListModel;
     notifyListeners();
     setItemModel(assuntoListModel);
@@ -35,13 +38,13 @@ class SubjectsProvider extends ChangeNotifier {
 
   Future<void> getAssuntos() async {
     setLoading(loading: true);
-    final response = await service.getAssuntos();
+    final response = await service.getModulos();
     if (response != null) {
       if (response.statusCode == 200) {
-        List<Assunto> assuntos;
+        List<Modulo> assuntos;
         final responseData = response.body;
         assuntos = (json.decode(responseData) as List)
-            .map((i) => Assunto.fromJson(i as Map<String, dynamic>))
+            .map((i) => Modulo.fromJson(i as Map<String, dynamic>))
             .toList();
         setAssuntoListModel(assuntos);
       }
@@ -63,14 +66,43 @@ class SubjectsProvider extends ChangeNotifier {
     setLoading(loading: false);
   }
 
-  void setItemModel(List<Assunto> assuntos) {
+  void setItemModel(List<Modulo> assuntos) {
     final List<ItemModel> listItemModel = [];
     for (var i = 0; i < assuntos.length; i++) {
+      final contents = assuntos[i].conteudos?.map<String>((conteudo) => conteudo.nome!).toList();
+      final contentList = assuntos[i]
+          .conteudos
+          ?.map<Widget>(
+            (conteudo) => Align(
+              alignment: Alignment.centerLeft,
+              child: TextButton(
+                onPressed: (){},
+                child: Text(
+                    conteudo.nome!,
+                  style: TextStyle(
+                    fontSize: 17,
+                    fontWeight: FontWeight.w600
+                  ),
+                ),
+              ),
+            ),
+          )
+          .toList();
       listItemModel.add(
-        ItemModel(headerItem: assuntos[i].titulo ?? '', itens: Column()),
+        ItemModel(
+            headerItem: assuntos[i].nome ?? '',
+            itens: contents!,
+            ),
       );
     }
     _listAssuntos = listItemModel;
+    notifyListeners();
+  }
+
+  void setExpandedData(int index) {
+    print(index);
+    _listAssuntos[index].expanded = !_listAssuntos[index].expanded;
+    print(_listAssuntos[index].headerItem);
     notifyListeners();
   }
 }

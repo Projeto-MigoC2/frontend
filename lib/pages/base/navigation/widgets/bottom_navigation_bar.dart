@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:migoc2/pages/base/navigation/provider/navigation_provider.dart';
+import 'package:migoc2/resources/theme_data.dart';
 import 'package:provider/provider.dart';
 import 'package:unicons/unicons.dart';
-import 'package:migoc2/resources/theme_data.dart';
+
 
 class BottomBar extends StatelessWidget {
   const BottomBar({super.key});

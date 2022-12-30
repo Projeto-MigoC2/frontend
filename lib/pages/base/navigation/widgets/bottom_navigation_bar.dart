@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:migoc2/pages/base/navigation/provider/navigation_provider.dart';
+import 'package:migoc2/resources/colors_extensions.dart';
 import 'package:provider/provider.dart';
 import 'package:unicons/unicons.dart';
 import 'package:migoc2/resources/theme_data.dart';
@@ -50,27 +51,31 @@ class _BottomBarState extends State<_BottomBar> {
           tabBackgroundGradient: LinearGradient(
             colors: [
               Theme.of(context).primaryColor,
-              const Color(0xffb996fd),
+              UIColors.primaryColor.withOpacity(0.5),
             ],
           ),
           tabBorderRadius: 20,
           onTabChange: provider.bottomTapped,
-          tabs: const [
+          tabs: [
             GButton(
               icon: UniconsLine.home_alt,
               text: 'Início',
+              iconActiveColor: UIColors.secondaryColor,
             ),
             GButton(
               icon: UniconsLine.search,
               text: 'Pesquisar',
+              iconActiveColor: UIColors.secondaryColor,
             ),
             GButton(
               icon: UniconsLine.books,
               text: 'Módulos',
+              iconActiveColor: UIColors.secondaryColor,
             ),
             GButton(
               icon: UniconsLine.setting,
               text: 'Ajustes',
+              iconActiveColor: UIColors.secondaryColor,
             )
           ],
         ),

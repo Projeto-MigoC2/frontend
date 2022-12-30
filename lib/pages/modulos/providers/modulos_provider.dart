@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:migoc2/pages/modulos/models/assunto_error.dart';
 import 'package:migoc2/pages/modulos/models/modulos_model.dart';
@@ -7,61 +8,64 @@ import 'package:migoc2/pages/modulos/widgets/item_model.dart';
 
 class ModulosProvider extends ChangeNotifier {
   bool _loading = false;
-  List<Modulo> _assuntoList = [];
-  AssuntoError? _assuntoError;
+  List<Modulo> _moduloList = [];
+  ModuloError? _moduloError;
   ModulosService service = ModulosService();
-  List<ItemModel> _listAssuntos = [];
+  List<ItemModel> _listModulos = [];
 
   bool get loading => _loading;
 
-  List<Modulo> get assuntoList => _assuntoList;
+  List<Modulo> get moduloList => _moduloList;
 
-  AssuntoError? get assuntoError => _assuntoError;
+  ModuloError? get moduloError => _moduloError;
 
-  List<ItemModel> get assuntoModelList => _listAssuntos;
+  List<ItemModel> get moduloModelList => _listModulos;
 
   Future<void> setLoading({required bool loading}) async {
     _loading = loading;
     notifyListeners();
   }
 
-  void setAssuntoListModel(List<Modulo> assuntoListModel) {
-    _assuntoList = assuntoListModel;
+  void setModuloListModel(List<Modulo> moduloListModel) {
+    _moduloList = moduloListModel;
     notifyListeners();
-    setItemModel(assuntoListModel);
+    setItemModel(moduloListModel);
   }
 
-  void setAssuntoError(AssuntoError subjectError) {
-    _assuntoError = subjectError;
+  void setModuloError(ModuloError subjectError) {
+    _moduloError = subjectError;
     notifyListeners();
   }
 
-  Future<void> getAssuntos() async {
+  Future<void> getModulos() async {
     setLoading(loading: true);
     final response = await service.getModulos();
     if (response != null) {
       if (response.statusCode == 200) {
-        List<Modulo> assuntos;
+        List<Modulo> modulos;
         final responseData = response.body;
-        assuntos = (json.decode(responseData) as List)
+        modulos = (json.decode(responseData) as List)
             .map((i) => Modulo.fromJson(i as Map<String, dynamic>))
             .toList();
-        setAssuntoListModel(assuntos);
+        modulos.sort((a, b) {
+          return compareAsciiUpperCase(a.nome ?? "", b.nome ?? "");
+        });
+        setModuloListModel(modulos);
       }
       if (response.statusCode >= 400) {
-        final AssuntoError subjectError = AssuntoError(
+        final ModuloError subjectError = ModuloError(
           code: response.statusCode,
           message: 'Não foi possível carregar',
         );
-        setAssuntoError(subjectError);
+        setModuloError(subjectError);
       }
     } else {
-      final AssuntoError subjectError = AssuntoError(
+      final ModuloError subjectError = ModuloError(
         code: 0,
         message:
             'Não foi possível carregar. Não há conexão disponível com a internet.',
       );
-      setAssuntoError(subjectError);
+      setModuloError(subjectError);
     }
     setLoading(loading: false);
   }
@@ -95,14 +99,12 @@ class ModulosProvider extends ChangeNotifier {
             ),
       );
     }
-    _listAssuntos = listItemModel;
+    _listModulos = listItemModel;
     notifyListeners();
   }
 
   void setExpandedData(int index) {
-    print(index);
-    _listAssuntos[index].expanded = !_listAssuntos[index].expanded;
-    print(_listAssuntos[index].headerItem);
+    _listModulos[index].expanded = !_listModulos[index].expanded;
     notifyListeners();
   }
 }

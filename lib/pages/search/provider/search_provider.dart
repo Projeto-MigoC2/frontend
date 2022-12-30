@@ -10,12 +10,14 @@ class SearchProvider extends ChangeNotifier {
   bool _isEmpty = false;
   bool _isMathKeyboardEnabled = false;
   String _text = '';
+  bool _keyboardIsVisible = false;
 
   bool get loading => _loading;
   List<Conteudo> get conteudoList => _conteudoList;
   bool get isEmpty => _isEmpty;
   bool get isMathKeyboardEnabled => _isMathKeyboardEnabled;
   String get text => _text;
+  bool get keyboardIsVisible => _keyboardIsVisible;
 
   Future<void> setLoading({required bool loading}) async {
     _loading = loading;
@@ -24,6 +26,11 @@ class SearchProvider extends ChangeNotifier {
 
   void setText(String text) {
     _text = text;
+    notifyListeners();
+  }
+
+  void setKeyboardIsVisible(bool value) {
+    _keyboardIsVisible = value;
     notifyListeners();
   }
 

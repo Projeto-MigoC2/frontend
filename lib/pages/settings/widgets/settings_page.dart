@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:migoc2/pages/settings/widgets/about_page.dart';
+import 'package:migoc2/resources/colors_extensions.dart';
 import 'package:migoc2/resources/theme_data.dart';
 import 'package:unicons/unicons.dart';
 
@@ -18,33 +20,10 @@ class SettingsPage extends StatelessWidget {
               Card(
                 child: ListTile(
                   tileColor: Theme.of(context).colorScheme.boxColor,
-                  leading: const Icon(UniconsLine.paint_tool),
-                  title: const Text(
-                    'Tema',
-                    style: TextStyle(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 17,
-                    ),
+                  leading: Icon(
+                    UniconsLine.info_circle,
+                    color: UIColors.secondaryColor,
                   ),
-                ),
-              ),
-              Card(
-                child: ListTile(
-                  tileColor: Theme.of(context).colorScheme.boxColor,
-                  leading: const Icon(UniconsLine.trash),
-                  title: const Text(
-                    'Limpar dados',
-                    style: TextStyle(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 17,
-                    ),
-                  ),
-                ),
-              ),
-              Card(
-                child: ListTile(
-                  tileColor: Theme.of(context).colorScheme.boxColor,
-                  leading: const Icon(UniconsLine.info_circle),
                   title: const Text(
                     'Sobre',
                     style: TextStyle(
@@ -52,6 +31,10 @@ class SettingsPage extends StatelessWidget {
                       fontSize: 17,
                     ),
                   ),
+                  onTap: () {
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => AboutPage()));
+                  },
                 ),
               )
             ],

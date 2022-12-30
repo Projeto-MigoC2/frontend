@@ -46,10 +46,11 @@ ThemeData themeData({
     appBarTheme: AppBarTheme(
       backgroundColor: UIColors.primaryColor,
       centerTitle: true,
-      titleTextStyle: const TextStyle(
+      titleTextStyle: TextStyle(
         fontFamily: 'Source Sans Pro',
         fontWeight: FontWeight.w600,
         fontSize: 20.0,
+        color: UIColors.secondaryColor,
       ),
     ),
     scaffoldBackgroundColor: isDarkTheme

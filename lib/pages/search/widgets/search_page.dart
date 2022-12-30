@@ -43,6 +43,7 @@ class _SearchPageState extends State<SearchPage> {
   Widget build(BuildContext context) {
     final provider = Provider.of<SearchProvider>(context);
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: SingleChildScrollView(
         physics: const ClampingScrollPhysics(),
         child: Column(
@@ -60,9 +61,13 @@ class _SearchPageState extends State<SearchPage> {
                     ),
                     child: CommonTextField(
                       isMath: provider.isMathKeyboardEnabled,
-                      textFieldHint: 'Procurar',
+                      textFieldHint: 'Buscar conteúdo',
                       action: () {
-                        provider.searchConteudo(provider.isMathKeyboardEnabled ? _mathTextController.currentNode.toString() : _textController.text);
+                        provider.searchConteudo(provider.isMathKeyboardEnabled
+                            ? _mathTextController
+                                .currentNode.children.first.expression
+                                .replaceAll(RegExp("{|}"), "")
+                            : _textController.text);
                       },
                       mathTextController: _mathTextController,
                       textController: _textController,
@@ -76,10 +81,21 @@ class _SearchPageState extends State<SearchPage> {
                 if (value.loading) {
                   return Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 22),
-                    child: LoadingBox(),
+                    child: Column(
+                      children: [
+                        LoadingBox(),
+                        LoadingBox(),
+                        LoadingBox(),
+                        LoadingBox(),
+                      ],
+                    ),
                   );
                 }
-                return content(context);
+                if (provider.keyboardIsVisible) {
+                  return Text("focus");
+                } else {
+                  return content(context);
+                }
               },
             )
           ],
@@ -93,6 +109,7 @@ class _SearchPageState extends State<SearchPage> {
     if (provider.isEmpty) {
       return semResultados();
     }
+
     return ListView.builder(
       shrinkWrap: true,
       itemCount: provider.conteudoList.length,

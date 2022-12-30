@@ -23,7 +23,7 @@ class _AppBaseState extends State<AppBase> {
   static const String appTitle = 'migoC2';
 
   List<Widget> pages = [
-    const HomePage(),
+    HomePage(),
     const SearchPage(),
     ModulosPage(),
     const SettingsPage()
@@ -32,28 +32,15 @@ class _AppBaseState extends State<AppBase> {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<NavigationProvider>(context);
-    final searchProvider = Provider.of<SearchProvider>(context);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: appTitle,
       theme: themeData(isDarkTheme: false, context: context),
-      darkTheme: themeData(isDarkTheme: true, context: context),
       home: Builder(
         builder: (BuildContext context) {
           return Scaffold(
             appBar: AppBar(
               title: Text(titles[provider.selectedIndex]),
-              actions: [
-                Visibility(
-                  visible: provider.selectedIndex == 1,
-                    child: IconButton(
-                        onPressed: (){
-                          searchProvider.setIsMathKeyboardEnabled(enabled: !searchProvider.isMathKeyboardEnabled);
-                        },
-                        icon: Icon(searchProvider.isMathKeyboardEnabled ? UniconsLine.calculator : UniconsLine.keyboard)
-                    ),
-                ),
-              ],
             ),
             body: PageView(
               physics: const NeverScrollableScrollPhysics(),

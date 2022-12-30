@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:migoc2/resources/theme_data.dart';
 import 'package:shimmer/shimmer.dart';
 
-class LoadingBox extends StatefulWidget {
+class ModulesLoadingBox extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => _LoadingBox();
+  State<StatefulWidget> createState() => _ModulesLoadingBox();
 }
 
-class _LoadingBox extends State<LoadingBox> {
+class _ModulesLoadingBox extends State<ModulesLoadingBox> {
   @override
   Widget build(BuildContext context) {
     const int timer = 1000;
@@ -29,7 +29,7 @@ class _LoadingBox extends State<LoadingBox> {
           )
         ],
       ),
-      height: 150,
+      height: 70,
       width: double.infinity,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,

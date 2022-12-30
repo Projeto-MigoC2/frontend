@@ -1,5 +1,5 @@
-class AssuntoError {
+class ModuloError {
   int code;
   Object message;
-  AssuntoError({required this.code, required this.message});
+  ModuloError({required this.code, required this.message});
 }

@@ -23,9 +23,7 @@ class CommonTextField extends StatefulWidget {
   State<CommonTextField> createState() => _CommonTextField();
 }
 
-
 class _CommonTextField extends State<CommonTextField> {
-
   @override
   Widget build(BuildContext context) {
     return DecoratedBox(
@@ -45,7 +43,7 @@ class _CommonTextField extends State<CommonTextField> {
         ],
       ),
       child: widget.isMath ? mathTextField(context) : textField(context),
-    );//
+    ); //
   }
 
   Widget mathTextField(BuildContext context) {
@@ -75,7 +73,7 @@ class _CommonTextField extends State<CommonTextField> {
               ),
               child: IconButton(
                 onPressed: widget.action,
-                color: const Color(0xff39EBB0),
+                color: UIColors.secondaryColor,
                 iconSize: 13,
                 icon: const Icon(Icons.arrow_forward_ios_rounded),
               ),
@@ -96,49 +94,50 @@ class _CommonTextField extends State<CommonTextField> {
   }
 
   Widget textField(BuildContext context) {
-     return TextField(
-         controller: widget.textController,
-         onTap: () => FocusScope.of(context).requestFocus(widget.focus),
-         focusNode: widget.focus,
-         decoration: InputDecoration(
-           focusColor: Theme.of(context).focusColor,
-           hintText: widget.textFieldHint,
-           border: OutlineInputBorder(
-             borderRadius: BorderRadius.circular(8),
-             borderSide: BorderSide.none,
-           ),
-           suffixIcon: Ink(
-             decoration: const ShapeDecoration(
-               color: Color(0xFF8C52FF),
-               shape: CircleBorder(),
-             ),
-             child: Padding(
-               padding: const EdgeInsets.only(right: 10),
-               child: Container(
-                 height: 15,
-                 width: 15,
-                 decoration: BoxDecoration(
-                   color: UIColors.primaryColor,
-                   shape: BoxShape.circle,
-                 ),
-                 child: IconButton(
-                   onPressed: widget.action,
-                   color: const Color(0xff39EBB0),
-                   iconSize: 13,
-                   icon: const Icon(Icons.arrow_forward_ios_rounded),
-                 ),
-               ),
-             ),
-           ),
-           prefixIcon: Padding(
-             padding: const EdgeInsets.only(left: 18, right: 29),
-             child: Icon(
-               Icons.search,
-               size: 30.0,
-               color: widget.focus.hasFocus ? Theme.of(context).focusColor : null,
-             ),
-           ),
-         ),
-       );
+    return TextField(
+      controller: widget.textController,
+      onTap: () => FocusScope.of(context).requestFocus(widget.focus),
+      onSubmitted: (value) {widget.action;},
+      focusNode: widget.focus,
+      decoration: InputDecoration(
+        focusColor: Theme.of(context).focusColor,
+        hintText: widget.textFieldHint,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: BorderSide.none,
+        ),
+        suffixIcon: Ink(
+          decoration: const ShapeDecoration(
+            color: Color(0xFF8C52FF),
+            shape: CircleBorder(),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.only(right: 10),
+            child: Container(
+              height: 15,
+              width: 15,
+              decoration: BoxDecoration(
+                color: UIColors.primaryColor,
+                shape: BoxShape.circle,
+              ),
+              child: IconButton(
+                onPressed: widget.action,
+                color: UIColors.secondaryColor,
+                iconSize: 13,
+                icon: const Icon(Icons.arrow_forward_ios_rounded),
+              ),
+            ),
+          ),
+        ),
+        prefixIcon: Padding(
+          padding: const EdgeInsets.only(left: 18, right: 29),
+          child: Icon(
+            Icons.search,
+            size: 30.0,
+            color: widget.focus.hasFocus ? Theme.of(context).focusColor : null,
+          ),
+        ),
+      ),
+    );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:migoc2/resources/colors_extensions.dart';
 
 Widget semResultados() {
   return Center(
@@ -7,16 +8,15 @@ Widget semResultados() {
       children: [
         Padding(
           padding: const EdgeInsets.only(top: 2, bottom: 30),
-          child: SvgPicture.asset(
-            'images/not_found.svg',
-            width: 150,
-            height: 150,
+          child: Image.asset(
+            'images/migo_computer.png',
+            width: 200,
           ),
         ),
-        const Text(
+        Text(
           'Sem resultados',
           style: TextStyle(
-            color: Colors.black,
+            color: UIColors.secondaryColor,
             fontWeight: FontWeight.w700,
             fontSize: 22,
           ),

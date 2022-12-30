@@ -22,16 +22,19 @@ class _ConteudoPage extends State<ConteudoPage> {
             keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
             slivers: [
               SliverAppBar.large(
-                title: Text(
-                  widget.conteudo.nome!,
-                  style: TextStyle(
-                    fontWeight: FontWeight.w700,
-                    fontSize: 25,
-                    fontFamily: Theme.of(context)
-                        .primaryTextTheme
-                        .bodyText1
-                        ?.fontFamily,
-                    color: UIColors.secondaryColor,
+                title: Padding(
+                  padding: const EdgeInsets.only(left: 30),
+                  child: Text(
+                    widget.conteudo.nome!,
+                    style: TextStyle(
+                      fontWeight: FontWeight.w700,
+                      fontSize: widget.conteudo.nome!.length > 50 ? 12 : 20,
+                      fontFamily: Theme.of(context)
+                          .primaryTextTheme
+                          .bodyText1
+                          ?.fontFamily,
+                      color: UIColors.secondaryColor,
+                    ),
                   ),
                 ),
               ),
@@ -40,23 +43,29 @@ class _ConteudoPage extends State<ConteudoPage> {
                   [
                     SafeArea(
                       top: true,
-                      child: TeXView(
-                        renderingEngine: const TeXViewRenderingEngine.katex(),
-                        child: TeXViewDocument(widget.conteudo.corpo!),
-                        style: TeXViewStyle(
-                          backgroundColor: Theme.of(context).backgroundColor,
-                          contentColor: Theme.of(context)
-                              .primaryTextTheme
-                              .bodyText1
-                              ?.color,
-                          padding: const TeXViewPadding.only(
-                            left: 20,
-                            right: 20,
-                          ),
-                          fontStyle: TeXViewFontStyle(
-                            fontSize: 20,
-                            fontFamily: 'Source Sans Pro',
-                            fontWeight: TeXViewFontWeight.w500,
+                      child: InteractiveViewer(
+                        minScale: 1,
+                        maxScale: 4,
+                        panEnabled: false,
+                        boundaryMargin: const EdgeInsets.all(80),
+                        child: TeXView(
+                          renderingEngine: const TeXViewRenderingEngine.mathjax(),
+                          child: TeXViewDocument(widget.conteudo.corpo!),
+                          style: TeXViewStyle(
+                            backgroundColor: Theme.of(context).backgroundColor,
+                            contentColor: Theme.of(context)
+                                .primaryTextTheme
+                                .bodyText1
+                                ?.color,
+                            padding: const TeXViewPadding.only(
+                              left: 20,
+                              right: 20,
+                            ),
+                            fontStyle: TeXViewFontStyle(
+                              fontSize: 20,
+                              fontFamily: 'Source Sans Pro',
+                              fontWeight: TeXViewFontWeight.w500,
+                            ),
                           ),
                         ),
                       ),

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tex/flutter_tex.dart';
 import 'package:migoc2/pages/conteudo/models/conteudo_model.dart';
+import 'package:migoc2/pages/conteudo/widgets/grafico_page.dart';
 import 'package:migoc2/resources/colors_extensions.dart';
-import 'package:migoc2/resources/theme_data.dart';
 
 class ConteudoPage extends StatefulWidget {
   const ConteudoPage({super.key, required this.conteudo});
@@ -16,6 +16,18 @@ class _ConteudoPage extends State<ConteudoPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          widget.conteudo.nome!,
+          style: TextStyle(
+            fontWeight: FontWeight.w700,
+            fontSize: 15,
+            fontFamily:
+                Theme.of(context).primaryTextTheme.bodyText1?.fontFamily,
+            color: UIColors.secondaryColor,
+          ),
+        ),
+      ),
       body: Ink(
         child: Center(
           child: CustomScrollView(
@@ -49,7 +61,8 @@ class _ConteudoPage extends State<ConteudoPage> {
                         panEnabled: false,
                         boundaryMargin: const EdgeInsets.all(80),
                         child: TeXView(
-                          renderingEngine: const TeXViewRenderingEngine.mathjax(),
+                          renderingEngine:
+                              const TeXViewRenderingEngine.mathjax(),
                           child: TeXViewDocument(widget.conteudo.corpo!),
                           style: TeXViewStyle(
                             backgroundColor: Theme.of(context).backgroundColor,

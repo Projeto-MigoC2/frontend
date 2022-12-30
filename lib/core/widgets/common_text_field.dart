@@ -6,9 +6,9 @@ class CommonTextField extends StatefulWidget {
   final String textFieldHint;
   final VoidCallback? action;
   final FocusNode focus = FocusNode();
-  MathFieldEditingController mathTextController;
-  TextEditingController textController;
-  bool isMath;
+  final MathFieldEditingController mathTextController;
+  final TextEditingController textController;
+  final bool isMath;
 
   CommonTextField({
     required this.textFieldHint,

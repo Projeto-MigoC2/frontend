@@ -73,19 +73,23 @@ class ModulosProvider extends ChangeNotifier {
   void setItemModel(List<Modulo> assuntos) {
     final List<ItemModel> listItemModel = [];
     for (var i = 0; i < assuntos.length; i++) {
-      final contents = assuntos[i].conteudos?.map<String>((conteudo) => conteudo.nome!).toList();
+      final contents = assuntos[i]
+          .conteudos
+          ?.map<String>((conteudo) => conteudo.nome!)
+          .toList();
+      // ignore: unused_local_variable
       final contentList = assuntos[i]
           .conteudos
           ?.map<Widget>(
             (conteudo) => Align(
               alignment: Alignment.centerLeft,
               child: TextButton(
-                onPressed: (){},
+                onPressed: () {},
                 child: Text(
-                    conteudo.nome!,
-                  style: TextStyle(
+                  conteudo.nome!,
+                  style: const TextStyle(
                     fontSize: 17,
-                    fontWeight: FontWeight.w600
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
               ),
@@ -94,9 +98,9 @@ class ModulosProvider extends ChangeNotifier {
           .toList();
       listItemModel.add(
         ItemModel(
-            headerItem: assuntos[i].nome ?? '',
-            itens: contents!,
-            ),
+          headerItem: assuntos[i].nome ?? '',
+          itens: contents!,
+        ),
       );
     }
     _listModulos = listItemModel;

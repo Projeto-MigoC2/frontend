@@ -16,18 +16,6 @@ class _ConteudoPage extends State<ConteudoPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          widget.conteudo.nome!,
-          style: TextStyle(
-            fontWeight: FontWeight.w700,
-            fontSize: 15,
-            fontFamily:
-                Theme.of(context).primaryTextTheme.bodyText1?.fontFamily,
-            color: UIColors.secondaryColor,
-          ),
-        ),
-      ),
       body: Ink(
         child: Center(
           child: CustomScrollView(

@@ -107,7 +107,6 @@ class AboutPage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(
                 top: 10,
-                right: 10
               ),
               child: boxMember(
                 context,
@@ -172,7 +171,10 @@ class AboutPage extends StatelessWidget {
                   ),
                   Expanded(
                     child: Padding(
-                      padding: const EdgeInsets.only(left: 20),
+                      padding: const EdgeInsets.only(
+                          left: 20,
+                          right: 10,
+                      ),
                       child: Text(
                         name,
                         style: TextStyle(

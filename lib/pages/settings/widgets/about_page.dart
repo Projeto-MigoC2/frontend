@@ -110,7 +110,7 @@ class AboutPage extends StatelessWidget {
               ),
               child: boxMember(
                 context,
-                'Vitor - Criador de Conteúdo',
+                'Vitor Cruz de Oliveira - Criador de Conteúdo',
                 'images/vitor.jpeg',
               ),
             ),

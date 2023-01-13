@@ -35,6 +35,7 @@ dependencies:
   flutter_tex: ^4.0.3+4
   google_nav_bar: ^5.0.6
   http: any
+  input_history_text_field: ^0.2.0
   lint:  any
   logging: ^1.0.0
   math_keyboard: ^0.1.7
@@ -43,7 +44,7 @@ dependencies:
   shared_preferences: ^2.0.15
   shimmer: ^2.0.0
   unicons: any
-  input_history_text_field: ^0.2.0
+
 
 dev_dependencies:
   change_app_package_name: any

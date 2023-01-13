@@ -97,6 +97,7 @@ class _CommonTextField extends State<CommonTextField> {
     return TextField(
       controller: widget.textController,
       onTap: () => FocusScope.of(context).requestFocus(widget.focus),
+      // ignore: unnecessary_statements
       onSubmitted: (value) {widget.action;},
       focusNode: widget.focus,
       decoration: InputDecoration(

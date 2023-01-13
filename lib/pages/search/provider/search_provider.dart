@@ -29,6 +29,7 @@ class SearchProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  // ignore: avoid_positional_boolean_parameters
   void setKeyboardIsVisible(bool value) {
     _keyboardIsVisible = value;
     notifyListeners();

@@ -63,7 +63,7 @@ class _ConteudoPage extends State<ConteudoPage> {
                               right: 20,
                             ),
                             fontStyle: TeXViewFontStyle(
-                              fontSize: 20,
+                              fontSize: 14,
                               fontFamily: 'Source Sans Pro',
                               fontWeight: TeXViewFontWeight.w500,
                             ),

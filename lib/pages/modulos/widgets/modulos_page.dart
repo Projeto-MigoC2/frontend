@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:migoc2/core/widgets/custom_expansion_panel_list.dart';
 import 'package:migoc2/core/widgets/error_screen.dart';
-import 'package:migoc2/core/widgets/loading_box.dart';
 import 'package:migoc2/core/widgets/modules_loading_box.dart';
 import 'package:migoc2/pages/conteudo/models/conteudo_model.dart';
 import 'package:migoc2/pages/conteudo/widgets/conteudo_page.dart';
@@ -92,7 +91,7 @@ class _ModulosPage extends State<ModulosPage> {
                                     alignment: Alignment.centerLeft,
                                     child: TextButton(
                                       style: TextButton.styleFrom(
-                                        foregroundColor: UIColors.terciaryColor
+                                        foregroundColor: UIColors.terciaryColor,
                                       ),
                                       onPressed: (){
                                         tappedContent(l, context);
@@ -122,7 +121,7 @@ class _ModulosPage extends State<ModulosPage> {
                             style: TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.w700,
-                              color: UIColors.secondaryColor
+                              color: UIColors.secondaryColor,
                             ),
                           ),
                         ),

@@ -67,7 +67,7 @@ class _SearchPageState extends State<SearchPage> {
                             ? _mathTextController
                                 .currentNode.children.first.expression
                                 .replaceAll(RegExp("{|}"), "")
-                            : _textController.text);
+                            : _textController.text,);
                       },
                       mathTextController: _mathTextController,
                       textController: _textController,
@@ -92,7 +92,7 @@ class _SearchPageState extends State<SearchPage> {
                   );
                 }
                 if (provider.keyboardIsVisible) {
-                  return Text("focus");
+                  return const Text("focus");
                 } else {
                   return content(context);
                 }

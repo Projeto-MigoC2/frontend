@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tex/flutter_tex.dart';
 import 'package:migoc2/pages/conteudo/models/conteudo_model.dart';
-import 'package:migoc2/pages/conteudo/widgets/grafico_page.dart';
 import 'package:migoc2/resources/colors_extensions.dart';
 
 class ConteudoPage extends StatefulWidget {
@@ -42,6 +41,7 @@ class _ConteudoPage extends State<ConteudoPage> {
                 delegate: SliverChildListDelegate(
                   [
                     SafeArea(
+                      // ignore: avoid_redundant_argument_values
                       top: true,
                       child: InteractiveViewer(
                         minScale: 1,
@@ -63,7 +63,7 @@ class _ConteudoPage extends State<ConteudoPage> {
                               right: 20,
                             ),
                             fontStyle: TeXViewFontStyle(
-                              fontSize: 20,
+                              fontSize: 14,
                               fontFamily: 'Source Sans Pro',
                               fontWeight: TeXViewFontWeight.w500,
                             ),

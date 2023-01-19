@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:migoc2/pages/base/navigation/provider/navigation_provider.dart';
 import 'package:migoc2/resources/colors_extensions.dart';
+import 'package:provider/provider.dart';
 import 'package:unicons/unicons.dart';
 
 class HomePage extends StatelessWidget {
@@ -9,6 +11,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<NavigationProvider>(context);
     return Scaffold(
       resizeToAvoidBottomInset: true,
       body: ListView(
@@ -70,20 +73,35 @@ class HomePage extends StatelessWidget {
         ),
       ),
       ),
-      box(
-      context,
-      'Buscar conteúdos de Cálculo 2',
-      UniconsLine.search,
+      GestureDetector(
+        onTap: () => {
+          provider.bottomTapped(1)
+        },
+        child: box(
+        context,
+        'Buscar conteúdos de Cálculo 2',
+        UniconsLine.search,
+        ),
       ),
-      box(
-      context,
-      'Acessar conteúdos de Cálculo 2 por módulos',
-      UniconsLine.books,
+      GestureDetector(
+        onTap: () => {
+          provider.bottomTapped(2)
+        },
+        child: box(
+        context,
+        'Acessar conteúdos de Cálculo 2 por módulos',
+        UniconsLine.books,
+        ),
       ),
-      box(
-      context,
-      'Acessar exercícios resolvidos de forma detalhada',
-      UniconsLine.sigma,
+      GestureDetector(
+        onTap: () => {
+          provider.bottomTapped(2)
+        },
+        child: box(
+        context,
+        'Acessar exercícios resolvidos de forma detalhada',
+        UniconsLine.sigma,
+        ),
       ),
         Padding(
           padding: const EdgeInsets.only(top: 10),
@@ -98,14 +116,14 @@ class HomePage extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+          padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
           child: Row(
             children: [
               Image.asset(
                 'images/unb_logo.jpg',
                 width: 80,
               ),
-              Spacer(),
+              const Spacer(),
               Image.asset(
                 'images/logo_a3m.png',
                 width: 80,

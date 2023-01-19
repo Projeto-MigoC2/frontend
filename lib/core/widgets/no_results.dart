@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:migoc2/resources/colors_extensions.dart';
 
 Widget semResultados() {

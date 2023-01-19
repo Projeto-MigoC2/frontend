@@ -70,7 +70,7 @@ class AboutPage extends StatelessWidget {
               ),
               child: boxMember(
                 context,
-                'Luiza Yoko Taneguti - Orientadora',
+                'Luiza Yoko Taneguti - Coordenadora',
                 'images/yoko.jpg',
               ),
             ),
@@ -115,6 +115,16 @@ class AboutPage extends StatelessWidget {
               ),
             ),
             Padding(
+              padding: const EdgeInsets.only(
+                top: 10,
+              ),
+              child: boxMember(
+                context,
+                'Luciano Freitas Melo - Criador de Conteúdo',
+                'images/luciano.jpeg',
+              ),
+            ),
+            Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Padding(
                 padding: const EdgeInsets.only(bottom: 40),
@@ -124,7 +134,7 @@ class AboutPage extends StatelessWidget {
                       'images/unb_logo.jpg',
                       width: 80,
                     ),
-                    Spacer(),
+                    const Spacer(),
                     Image.asset(
                       'images/logo_a3m.png',
                       width: 80,
